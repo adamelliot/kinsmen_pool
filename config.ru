@@ -1,3 +1,3 @@
-require 'kinsmen-pool'
+require 'kinsmen_pool'
 
-run Sinatra::Application
+run KinsmenPool::Server::Base
