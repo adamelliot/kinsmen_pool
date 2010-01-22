@@ -1,1 +1,1 @@
-task :cron => [:environment, :load_calendar]
+task :cron => :load_calendar
