@@ -1,4 +1,4 @@
 icalendar --version '>= 1.1.0' --source gemcutter.org
 mechanize --version '>= 0.9.3' --source gemcutter.org
-active_support --version '>= 2.3.4' --source gemcutter.org
+activesupport --version '>= 2.3.4' --source gemcutter.org
 
