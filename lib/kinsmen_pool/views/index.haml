@@ -9,4 +9,6 @@
     %meta{:name => "description", :content => "iCalendar format for Kinsmen pool schedules" }  
   %body
 
-    %a{:href => '/diving.ics'} Dive Tank
+    - @pools.each do |pool|
+      %p
+        %a{:href => "webcal://#{request.host}:#{request.port}/#{pool.slug}.ics"}= pool.name

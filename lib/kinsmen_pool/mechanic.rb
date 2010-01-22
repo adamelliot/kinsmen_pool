@@ -29,26 +29,22 @@ module KinsmenPool
 
         rows.each do |row|
           pool_name = strip_html(row.search('th').first.inner_html)
-
-          pool = Pool.get(:name => pool_name) || Pool.new(:name => pool_name)
+          pool = Pool.first(:name => pool_name) || Pool.new(:name => pool_name)
           pool.save
 
           times = row.search('td')
-          times.shift
+          info = strip_html(times.shift.text).strip
+
           i = 0
           times.each do |time|
             pool.clear_date(dates[i])
             times = create_time_pairs(time.children, dates[i])
             times.each do |time|
-              pool.pool_events.create(:start_time => time.begin, :end_time => time.end)
+              pool.pool_events.create(:start_time => time.begin, :end_time => time.end, :info => info)
             end
             i += 1
           end
         end
-      end
-      
-      Pool.all.each do |pool|
-        puts pool.name
       end
     end
     
@@ -68,7 +64,7 @@ module KinsmenPool
             pairs << create_time_pairs(node.children, base_date)
           when 'br'
           else
-            puts "Smelly tag: #{node.name}"
+#            puts "Smelly tag: #{node.name}"
           end
         end
 
@@ -106,8 +102,6 @@ module KinsmenPool
             
             s << e[-2, 2] if s[-1] != 'm'[0]
             return (DateTime.parse("#{s} MST #{base_date.to_s}"))..(DateTime.parse("#{e} MST #{base_date.to_s}"))
-            
-#            puts "#{s} -- #{e}"
           end
         end
         nil

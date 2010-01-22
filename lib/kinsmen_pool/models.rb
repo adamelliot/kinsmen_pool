@@ -1,4 +1,5 @@
 require 'dm-core'
+require 'stringex'
 require 'icalendar'
 require 'date'
 require 'active_support'
@@ -14,7 +15,10 @@ module KinsmenPool
 
       property :id,     Serial
       property :name,   String
-  
+      property :slug,   String
+
+      before :save, :sluggify
+
       def calendar
         cal = Calendar.new
     
@@ -24,6 +28,7 @@ module KinsmenPool
             dtstart     pool_event.start_time
             dtend       pool_event.end_time
             summary     pool.name
+            description pool_event.info
           end
         end
         cal
@@ -32,6 +37,11 @@ module KinsmenPool
       def clear_date(date)
         pool_events(:start_time.gte => date.midnight, :start_time.lte => date.end_of_day).destroy!
       end
+      
+      private
+        def sluggify
+          self.slug = self.name.to_url
+        end
     end
 
     class PoolEvent
@@ -49,7 +59,7 @@ module KinsmenPool
     class Pool
       has n, :pool_events
     end
-
-    DataMapper.auto_migrate!
   end
 end
+
+#DataMapper.auto_migrate!
