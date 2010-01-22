@@ -62,4 +62,4 @@ module KinsmenPool
   end
 end
 
-DataMapper.auto_migrate!
+#DataMapper.auto_migrate!
