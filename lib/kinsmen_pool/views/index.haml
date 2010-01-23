@@ -9,6 +9,25 @@
     %meta{:name => "description", :content => "iCalendar format for Kinsmen pool schedules" }  
   %body
 
-    - @pools.each do |pool|
-      %p
-        %a{:href => "webcal://#{request.host}:#{request.port}/#{pool.slug}.ics"}= pool.name
+    #content
+      #icon
+        .month= Date.today.strftime("%b").upcase
+        .day= Date.today.strftime("%d")
+
+      #pools
+        %h1 Kinsmen Pool Schedules
+        %ul
+          - @pools.each do |pool|
+            %li
+              %a{:href => "webcal://#{request.host_with_port}/#{pool.slug}.ics"}= pool.name
+              %span.download
+                [
+                %a{:href => "http://#{request.host_with_port}/#{pool.slug}.ics"} download ics
+                ]
+
+      .clear
+
+    #footer
+      %a{:href => 'http://github.com/adamelliot/kinsmen_pool'} fork me!
+      |
+      %a{:href => 'http://adamelliot.com/'} adamelliot.com

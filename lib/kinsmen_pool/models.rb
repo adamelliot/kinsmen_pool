@@ -29,6 +29,7 @@ module KinsmenPool
             dtend       pool_event.end_time
             summary     pool.name
             description pool_event.info
+            url         pool_event.url
           end
         end
         cal
@@ -55,12 +56,14 @@ module KinsmenPool
       property :all_day,    Boolean,  :default => false
       property :info,       String
       property :url,        String
+      
+      
     end
 
     class Pool
       has n, :pool_events
     end
+
+    DataMapper.auto_migrate!
   end
 end
-
-#DataMapper.auto_migrate!

@@ -28,7 +28,7 @@ module KinsmenPool
         end
 
         rows.each do |row|
-          pool_name = strip_html(row.search('th').first.inner_html)
+          pool_name = strip_html(row.search('th').first.inner_html).gsub(/\**$/, '')
           pool = Pool.first(:name => pool_name) || Pool.new(:name => pool_name)
           pool.save
 

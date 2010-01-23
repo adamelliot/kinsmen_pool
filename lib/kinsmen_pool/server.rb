@@ -5,7 +5,7 @@ require 'sass'
 module KinsmenPool
   module Server
     class Base < Sinatra::Base
-      enable :logging
+      enable :logging, :static
       set :root, File.dirname(__FILE__)
 
       configure do

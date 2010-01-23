@@ -1,5 +1,3 @@
-require 'examples/example_helper'
-
 describe KinsmenPool::Models::Pool do
   before :each do
     KinsmenPool::Models::Pool.all.destroy!
