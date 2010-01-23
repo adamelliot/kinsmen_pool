@@ -18,8 +18,7 @@ module KinsmenPool
       
       get '/' do
         @pools = KinsmenPool::Models::Pool.all
-        #haml :index
-        "Test"
+        haml :index
       end
 
       get %r{/([^\.\/]*).ics} do
