@@ -48,13 +48,4 @@ task :load_calendar do
   KinsmenPool::Mechanic.read_calendar
 end
 
-namespace :db do
-  desc "Auto migrates the data model"
-  task :migrate do
-    include KinsmenPool::Models
-
-    DataMapper.auto_migrate!
-  end
-end
-
 task :default => :examples
