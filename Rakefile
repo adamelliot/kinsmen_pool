@@ -2,6 +2,7 @@ $:.unshift(File.join(File.dirname(__FILE__), 'lib'))
 
 require 'rubygems'
 require 'rake'
+require 'kinsmen_pool'
 
 load 'lib/tasks/cron.rake'
 
@@ -44,9 +45,16 @@ end
 
 desc "Loads the current calendar into the database so it can be served"
 task :load_calendar do
-  require 'kinsmen_pool'
-
   KinsmenPool::Mechanic.read_calendar
+end
+
+namespace :db do
+  desc "Auto migrates the data model"
+  task :migrate do
+    include KinsmenPool::Models
+
+    DataMapper.auto_migrate!
+  end
 end
 
 task :default => :examples
