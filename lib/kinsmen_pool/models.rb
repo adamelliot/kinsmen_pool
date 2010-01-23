@@ -29,7 +29,7 @@ module KinsmenPool
             dtend       pool_event.end_time
             summary     pool.name
             description pool_event.info
-#            url         pool_event.url
+            url         pool_event.url
           end
         end
         cal
@@ -55,7 +55,7 @@ module KinsmenPool
       property :end_time,   DateTime
       property :all_day,    Boolean,  :default => false
       property :info,       String
-#      property :url,        String#,   :length => 100
+      property :url,        String,   :length => 100
     end
 
     class Pool
@@ -63,5 +63,3 @@ module KinsmenPool
     end
   end
 end
-
-DataMapper.auto_migrate!
