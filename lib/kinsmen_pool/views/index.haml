@@ -19,10 +19,10 @@
         %ul
           - @pools.each do |pool|
             %li
-              %a{:href => "webcal://#{request.host_with_port}/#{pool.slug}.ics"}= pool.name
+              %a{:href => "webcal://#{request.host}/#{pool.slug}.ics"}= pool.name
               %span.download
                 [
-                %a{:href => "http://#{request.host_with_port}/#{pool.slug}.ics"} download ics
+                %a{:href => "http://#{request.host}/#{pool.slug}.ics"} download ics
                 ]
 
       .clear
