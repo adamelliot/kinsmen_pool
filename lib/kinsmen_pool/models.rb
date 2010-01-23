@@ -63,5 +63,3 @@ module KinsmenPool
     end
   end
 end
-
-DataMapper.auto_migrate!
