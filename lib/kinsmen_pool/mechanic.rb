@@ -43,8 +43,8 @@ module KinsmenPool
               pool.pool_events.create(
                 :start_time => time.begin,
                 :end_time => time.end,
-                :info => info,
-                :url => "SITE_URL")
+                :info => info)
+#                :url => "SITE_URL")
             end
             i += 1
           end
