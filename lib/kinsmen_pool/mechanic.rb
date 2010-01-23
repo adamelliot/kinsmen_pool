@@ -44,7 +44,7 @@ module KinsmenPool
                 :start_time => time.begin,
                 :end_time => time.end,
                 :info => info,
-                :url => SITE_URL)
+                :url => "SITE_URL")
             end
             i += 1
           end

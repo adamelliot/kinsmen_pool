@@ -55,7 +55,7 @@ module KinsmenPool
       property :end_time,   DateTime
       property :all_day,    Boolean,  :default => false
       property :info,       String
-      property :url,        String,   :length => 200
+      property :url,        String#,   :length => 100
     end
 
     class Pool
