@@ -63,7 +63,5 @@ module KinsmenPool
     class Pool
       has n, :pool_events
     end
-
-    DataMapper.auto_migrate!
   end
 end
