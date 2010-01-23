@@ -1,5 +1,5 @@
 require 'dm-core'
-require 'stringex'
+require 'dm-types'
 require 'icalendar'
 require 'date'
 require 'active_support'
@@ -15,7 +15,7 @@ module KinsmenPool
 
       property :id,     Serial
       property :name,   String
-      property :slug,   String
+      property :slug,   Slug
 
       before :save, :sluggify
 
@@ -41,7 +41,7 @@ module KinsmenPool
       
       private
         def sluggify
-          self.slug = self.name.to_url
+          self.slug = self.name
         end
     end
 
