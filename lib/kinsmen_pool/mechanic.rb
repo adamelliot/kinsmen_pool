@@ -40,7 +40,11 @@ module KinsmenPool
             pool.clear_date(dates[i])
             times = create_time_pairs(time.children, dates[i])
             times.each do |time|
-              pool.pool_events.create(:start_time => time.begin, :end_time => time.end, :info => info)
+              pool.pool_events.create(
+                :start_time => time.begin,
+                :end_time => time.end,
+                :info => info,
+                :url => SITE_URL)
             end
             i += 1
           end
@@ -60,11 +64,10 @@ module KinsmenPool
           case node.name
           when "text"
             pairs << get_time_pair(node.text, base_date)
-          when "p"
+          when "p", "strong"
             pairs << create_time_pairs(node.children, base_date)
-          when 'br'
           else
-#            puts "Smelly tag: #{node.name}"
+            pairs
           end
         end
 
