@@ -16,31 +16,6 @@ Autotest.add_hook :initialize do |at|
   at.add_mapping(%r%^examples/(example_helper|shared/.*)\.rb$%) { 
     at.files_matching %r%^examples/.*_example\.rb$%
   }
-end
 
-class MicronautCommandError < StandardError; end
-
-class Autotest::Micronaut < Autotest
-  remove_method :consolidate_failures if instance_methods(false).include?("consolidate_failures")
-  remove_method :make_test_cmd if instance_methods(false).include?("make_test_cmd")
- 
-  def consolidate_failures(failed)
-    filters = new_hash_of_arrays
-    failed.each do |spec, trace|
-      if trace =~ /\n(\.\/)?(.*example\.rb):[\d]+:\Z?/
-        filters[$2] << spec
-      end
-    end
-    return filters
-  end
-
-  def make_test_cmd(files_to_test)
-    return '' if files_to_test.empty?
-    
-    examples = files_to_test.keys.flatten
-    
-    examples.map! {|f| %Q(require "#{f}")}
- 
-    return "#{ruby} -e '#{examples.join("; ")}'"
-  end
+  at.testlib = 'examples/example_helper.rb'
 end

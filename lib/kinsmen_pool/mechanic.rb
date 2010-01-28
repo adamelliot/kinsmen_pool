@@ -24,7 +24,7 @@ module KinsmenPool
         headings.shift
         headings.shift
         headings.each do |heading|
-          dates.push Date.parse(heading.text)
+          dates.push Date.parse(heading.text.gsub(/(day)/, '\1 '))
         end
 
         rows.each do |row|
